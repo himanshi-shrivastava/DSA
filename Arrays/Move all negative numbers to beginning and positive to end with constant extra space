@@ -1,0 +1,40 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+
+class GFG {
+    
+    public static void move(int[] arr){
+        
+        int start =0;
+        int end = arr.length -1;
+        
+        while(start <end){
+            
+            if(arr[start] <0){
+                start++;
+            }
+            
+            if(arr[end] > 0)
+                end--;
+            
+            if(arr[start]>0 && arr[end] < 0)
+                {
+                    int t = arr[start];
+                    arr[start] = arr[end];
+                    arr[end] = t;
+                    start++;
+                    end--;
+                }
+            
+                
+        }
+    }
+	public static void main (String[] args) {
+		
+        int[] arr = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
+        move(arr);
+        for (int e : arr)
+            System.out.print(e + " ");
+	}
+}
