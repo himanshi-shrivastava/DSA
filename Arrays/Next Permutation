@@ -1,0 +1,34 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        
+//       1.Start traversing from the end of the array and find an item which is lesser that its right neighbour.
+// [4,2,0,2,3,2,0]
+//        ^
+// (^ points to the first item when travering the array from right which is smaller than its right neighbour)
+       
+// 2.Now this lesser item needs to be swapped with the smallest possible larger item to the right of it. This way we get a bigger number as we swapped in lower item in the left by the larger item.
+// [4,2,0,2,3,2,0] => [4,2,0,3,2,2,0]  (Swap items pointed by ^)
+//        ^ ^
+// 3. Now we sort the part of the array to the right of the item that was swapped as it give the smallest possible number which is still greater than the input.
+// [4,2,0,3,2,2,0] => [4,2,0,3,0,2,2] (Sort the portion on the array to the right of ^)
+
+
+        int p = nums.length - 1;
+        while(p > 0 && nums[p] <= nums[p - 1]) {
+            p--;
+        }
+        if(p == 0) {
+            Arrays.sort(nums);
+            return;
+        }
+        int q = p;
+        while(q < nums.length && nums[q] > nums[p - 1]) {
+            q++;
+        }
+        q--;
+        int temp = nums[p - 1];
+        nums[p - 1] = nums[q];
+        nums[q] = temp;
+        Arrays.sort(nums, p, nums.length);
+    }
+}
